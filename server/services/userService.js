@@ -95,3 +95,4 @@ module.exports.updateUserProfile = async serviceData => {
     throw new Error(error)
   }
 }
+

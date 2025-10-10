@@ -67,3 +67,4 @@ module.exports.updateUserProfile = async (req, res) => {
 
   return res.status(response.status).send(response)
 }
+
