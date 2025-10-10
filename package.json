@@ -18,11 +18,12 @@
     "swagger-ui-express": "^4.1.4",
     "yamljs": "^0.3.0"
   },
-  "scripts": {
-    "dev:server": "nodemon ./server/server.js",
-    "populate-db": "node ./server/scripts/populateDatabase.js",
-    "server": "node ./server/server.js"
-  },
+"scripts": {
+  "dev": "nodemon ./server/server.js",
+  "start": "node ./server/server.js",
+  "populate-db": "node ./server/scripts/populateDatabase.js"
+},
+
   "devDependencies": {
     "nodemon": "^2.0.4"
   }
