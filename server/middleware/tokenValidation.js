@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+// ✅ SUPPRIMÉ: const { restart } = require('nodemon') - inutile et plante en production
 
 module.exports.validateToken = (req, res, next) => {
   let response = {}
@@ -18,8 +19,6 @@ module.exports.validateToken = (req, res, next) => {
     console.error('Error in tokenValidation.js', error)
     response.status = 401
     response.message = error.message
+    return res.status(response.status).send(response) // ✅ Ajout du return
   }
-
-  return res.status(response.status).send(response)
 }
-
