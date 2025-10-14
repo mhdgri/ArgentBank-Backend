@@ -11,19 +11,17 @@ dotEnv.config()
 const app = express()
 const PORT = process.env.PORT || 3001
 
-// Connect to the database
 dbConnection()
 
-// ✅ CORS CORRIGÉ - Autorise Vercel en production
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
-  process.env.FRONTEND_URL || 'https://ton-app.vercel.app' // ⚠️ REMPLACE par ton URL Vercel
+  process.env.FRONTEND_URL
 ]
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Autorise les requêtes sans origin (Postman, etc.)
+
     if (!origin) return callback(null, true)
     
     if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
@@ -42,7 +40,7 @@ app.use(express.urlencoded({ extended: true }))
 // Handle custom routes
 app.use('/api/v1/user', require('./routes/userRoutes'))
 
-// ✅ Swagger avec chemin absolu
+// Swagger avec chemin absolu
 const swaggerPath = path.join(__dirname, '../swagger.yaml')
 try {
   const swaggerDocs = yaml.load(swaggerPath)
@@ -61,7 +59,7 @@ app.get('/', (req, res) => {
   })
 })
 
-// ✅ Health check endpoint
+// Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', database: 'connected' })
 })
